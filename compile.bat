@@ -1,1 +1,1 @@
-g++ main.cpp img_data_IO.cpp -I ./CImg -o a
+g++ main.cpp img_data_IO.cpp -I . -o a

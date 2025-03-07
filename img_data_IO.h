@@ -7,22 +7,24 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-struct img_colors{
-    unsigned char red;
-    unsigned char green;
-    unsigned char blue;
-    unsigned char alpha;
+class Image{
+    public:
+        Image(fs::path);
+        Image(fs::path, int, int, int, unsigned char*);
+        unsigned char* get_data();
+        int get_channels();
+        int get_height();
+        int get_length();
+        void save_image();
+        ~Image();
+    private:
+        unsigned char* copy_color_data(unsigned char*);
+        fs::path _file_path;
+        bool _from_stbi;
+        unsigned char* _colors;
+        int _length;
+        int _height;
+        int _channels;
 };
-
-struct image
-{
-    img_colors* colors;
-    int length;
-    int height;
-    int channels;
-};
-
-image getImage(fs::path);
-void saveImage(image, fs::path);
 
 #endif
