@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <filesystem>
+#include <string>
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -16,6 +17,7 @@ class Image{
         int get_height();
         int get_length();
         void save_image();
+        std::string get_file_path();
         ~Image();
     private:
         unsigned char* copy_color_data(unsigned char*);

@@ -20,6 +20,10 @@ Image::Image(fs::path path, int h, int l, int channels, unsigned char* color_dat
     copy_color_data(color_data);
 }
 
+std::string Image::get_file_path(){
+    return _file_path.string();
+}
+
 unsigned char* Image::copy_color_data(unsigned char* to_copy){
     size_t color_size =  _height * _length * _channels;
     _colors = new unsigned char[color_size];
