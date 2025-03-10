@@ -8,10 +8,10 @@ const int MAX_APLHA_VALUE = 255;
 int bounded_value(int value, int max);
 
 //Convolution operation
-Image conv_op(Image image, Image kernal);
+Image* conv_op(Image* image, Image* kernal, fs::path output_loc);
 
 //Convolution operation with Fast Forier Transform
-Image conv_op_fft(Image image, Image kernal);
+Image* conv_op_fft(Image* image, Image* kernal, fs::path output_loc);
 
 
 int main(int argc, char** argv){
@@ -37,19 +37,18 @@ int bounded_value(int value, int max){
 }
 
 
-Image conv_op(Image image, Image kernal){
+Image* conv_op(Image* image, Image* kernal, fs::path output_loc){
     if(image.get_channels() != kernal.get_channels()) 
         throw "Image (" + image.get_file_path() + ") / Kernal (" + kernal.get_file_path() + ") do not have the same number of channels!";
-    if(image.get_height() < kernal.get_height() || image.get_length() < kernal.get_length())
+    if(image.get_height() < kernal.get_height() || image.get_width() < kernal.get_width())
         throw "Image (" + image.get_file_path() + ") is smaller than Kernal (" + kernal.get_file_path() + ")";
 
     //Calculate output
     int output_h = image.get_height() - kernal.get_height() + 1;
-    int output_l = image.get_length() - kernal.get_length() + 1;
+    int output_l = image.get_width() - kernal.get_width() + 1;
     int output_c = image.get_channels();
-    unsigned char* output = new unsigned char[output_h * output_l * output_c];
-
-    float normaize_value = kernal.get_length() * kernal.get_height() * 255;
+    Image* output = new Image(output_loc, output_l, output_h, image->get_channels());
+    float normaize_value = kernal.get_width() * kernal.get_height() * 255;
 
     int channels = output_c;    
     // Too many for loops x_x
@@ -63,7 +62,7 @@ Image conv_op(Image image, Image kernal){
                 }
 
                 float total = 0;
-                for (int k_l = 0; k_l < kernal.get_length(); k_l++){
+                for (int k_l = 0; k_l < kernal.get_width(); k_l++){
                     for(int k_h = 0; k_h < kernal.get_height(); k_h++){
                         int image_x = x + k_h;
                         int image_y = y + k_l;

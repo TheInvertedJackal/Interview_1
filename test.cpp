@@ -7,7 +7,7 @@ main(){
     fs::path working_dir = fs::current_path();
     fs::path test_img = working_dir / "test.png";
     Image img = Image(test_img);
-    int test_l = img.get_length();
+    int test_l = img.get_width();
     int test_h = img.get_height();
     int test_c = img.get_channels();
     std::cout << test_l << " | " << test_h << " | " << test_c << endl;

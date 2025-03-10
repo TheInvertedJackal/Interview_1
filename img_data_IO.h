@@ -13,11 +13,19 @@ class Image{
         Image(fs::path);
         Image(fs::path, int x, int y, int c);
         Image(fs::path, int x, int y, int c, unsigned char* raw_data);
+        // Gets the number of channels in the image
         int get_channels();
+        // Gets the image height or y
         int get_height();
-        int get_length();
+        // Gets the image width or x
+        int get_width();
+        // Saves the image to the set file path
         void save_image();
+        // Gets the pixel value at a set x, y and c (channel)
         double at(int x, int y, int c);
+        // Gets the gray scale value of a given pixel at a x and y
+        double at_grey(int x, int y);
+        // Sets the double value of a given pixel at x and y
         void set(double value, int x, int y, int c);
         std::string get_file_path();
         ~Image();

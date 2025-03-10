@@ -94,6 +94,19 @@ unsigned char* Image::double_to_u_eight(double* data, int len){
     return ret_val;
 }
 
+double Image::at_grey(int x, int y){
+    if(_channels == 2)
+        return _colors_d[_channels * (y * _width + x)];
+    if(_channels == 3 || _channels == 4){
+        // Nubmers from https://goodcalculators.com/rgb-to-grayscale-conversion-calculator/
+        double r = _colors_d[_channels * (y * _width + x)];
+        double g = _colors_d[_channels * (y * _width + x) + 1];
+        double b = _colors_d[_channels * (y * _width + x) + 2];
+        return .288 * r + .587 * g + .114 * b;
+    }
+    throw "Channel Number not supported!";
+}
+
 // unsigned char* Image::get_data(){
 //     return _colors;
 // }
@@ -106,7 +119,7 @@ int Image::get_height(){
     return _height;
 }
 
-int Image::get_length(){
+int Image::get_width(){
     return _width;
 } 
 
