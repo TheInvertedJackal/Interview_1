@@ -62,8 +62,6 @@ double Image::at(int x, int y, int c){
 }
 
 void Image::set(double d, int x, int y, int c){
-    if(d > 1.0 || d < 0)
-        throw "Value must be between 0 and 1!";
     if(x < 0 || x >= _width)
         throw "Index out of range for Image x / Length";
     if(y < 0 || y >= _height)
@@ -87,6 +85,9 @@ double* Image::u_eight_to_double(unsigned char* data, int len){
 unsigned char* Image::double_to_u_eight(double* data, int len){
     unsigned char* ret_val = new unsigned char[len];
     for (int i = 0; i < len; i++){
+        //If it's above or below the range, set it to 0 or 1
+        if(data[i] > 1) data[i] = 1;
+        if(data[i] < 0) data[i] = 0;
         double value = round(data[i] * 255);
         ret_val[i] = static_cast<unsigned char>(round(data[i] * 255));
         //std::cout << "Double:" << data[i] << " Rounded:" << value << " new u8:" << static_cast<unsigned>(ret_val[i]) << endl;
