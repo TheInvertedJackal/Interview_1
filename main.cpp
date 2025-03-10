@@ -49,9 +49,6 @@ Image conv_op(Image image, Image kernal){
     int output_c = image.get_channels();
     unsigned char* output = new unsigned char[output_h * output_l * output_c];
 
-    unsigned char* image_cd = image.get_data();
-    unsigned char* kernal_cd = kernal.get_data();
-
     float normaize_value = kernal.get_length() * kernal.get_height() * 255;
 
     int channels = output_c;    
@@ -70,12 +67,12 @@ Image conv_op(Image image, Image kernal){
                     for(int k_h = 0; k_h < kernal.get_height(); k_h++){
                         int image_x = x + k_h;
                         int image_y = y + k_l;
-                        int i_v = image_cd[image_y * image.get_height() + image_x + c];
-                        int k_v = kernal_cd[k_h * kernal.get_height() + k_h + c];
-                        total += (i_v * k_v) / normaize_value;
+                        //int i_v = image_cd[image_y * image.get_height() + image_x + c];
+                        //int k_v = kernal_cd[k_h * kernal.get_height() + k_h + c];
+                        //total += (i_v * k_v) / normaize_value;
                     }
                 }
-                output[y * output_l + x + c] = static_cast<unsigned char>(round(total));
+                //output[y * output_l + x + c] = static_cast<unsigned char>(round(total));
             }
         }
     }

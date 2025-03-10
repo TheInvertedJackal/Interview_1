@@ -1,0 +1,1 @@
+g++ test.cpp img_data_IO.cpp -o img_test
