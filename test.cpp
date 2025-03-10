@@ -11,7 +11,7 @@ main(){
     int test_h = img.get_height();
     int test_c = img.get_channels();
     std::cout << test_l << " | " << test_h << " | " << test_c << endl;
-    for (size_t x = 0; x < test_l; x++){
+    for (int x = 0; x < test_l; x++){
         for (int y = 0; y < test_h; y++){
             for (int c = 0; c < test_c; c++){
                 if(x == y){
