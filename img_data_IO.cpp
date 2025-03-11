@@ -23,6 +23,7 @@ Image::Image(fs::path path, int x, int y, int c){
     _width = x;
     _height = y;
     _channels = c;
+    _file_path = path;
     _total_elements = _width * _height * _channels;
     _colors_d = new double[x * y * c];
 };
@@ -34,6 +35,7 @@ Image::Image(fs::path path, int x, int y, int channels, unsigned char* color_dat
     _channels = channels;
     //copy_color_data(color_data);
     _total_elements = _width * _height * _channels;
+    _file_path = path;
     _colors_d = u_eight_to_double(color_data, _total_elements);
 }
 
@@ -133,4 +135,8 @@ void Image::save_image(){
 Image::~Image(){
     // Free and MALLOC cannot mix, and thus they must be kept seprate
     delete [] _colors_d;
+}
+
+Image from_txt(fs::path path){
+    
 }

@@ -40,4 +40,6 @@ class Image{
         int _channels;
 };
 
+Image from_txt(fs::path path);
+
 #endif
